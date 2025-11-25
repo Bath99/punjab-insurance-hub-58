@@ -42,7 +42,7 @@ export default function Services() {
       icon: Globe,
       title: "Visitor Insurance",
       description: "Protection for tourists visiting Canada",
-      features: ["$150,000 medical/dental", "Trip interruption", "1-364 days coverage", "Online comparison tool"],
+      features: ["Emergency medical coverage", "Trip interruption", "1-364 days coverage", "Online comparison tool"],
       eligibility: "Non-residents to Canada",
       color: "from-green-500 to-emerald-500"
     },

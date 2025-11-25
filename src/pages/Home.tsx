@@ -73,10 +73,10 @@ export default function Home() {
                     <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
                       <Users className="w-6 h-6 text-white" />
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-900">Family Focused</h3>
-                      <p className="text-sm text-slate-600">South Asian Specialists</p>
-                    </div>
+                  <div>
+                    <h3 className="font-semibold text-slate-900">Family Focused</h3>
+                    <p className="text-sm text-slate-600">Community Specialists</p>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -116,7 +116,7 @@ export default function Home() {
               <p className="text-lg text-slate-600 leading-relaxed">
                 As an independent advisor working with Punjab Insurance, I bring years of expertise 
                 in providing tailored insurance solutions to Canadian families. My approach combines 
-                industry knowledge with a deep understanding of the unique needs of South Asian communities.
+                industry knowledge with a deep understanding of diverse community needs.
               </p>
 
               <div className="space-y-4">
