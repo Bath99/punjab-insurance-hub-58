@@ -135,7 +135,7 @@ export default function Contact() {
                 </div>
                 <p className="text-blue-50 leading-relaxed">
                   With extensive experience in the insurance industry and a deep understanding of 
-                  the unique needs of South Asian families, I'm committed to providing you with 
+                  diverse community needs, I'm committed to providing you with 
                   the best coverage at competitive rates.
                 </p>
               </div>
@@ -159,7 +159,7 @@ export default function Contact() {
                     <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                       <div className="w-2 h-2 bg-green-600 rounded-full" />
                     </div>
-                    <span className="text-slate-700">Expertise in South Asian community needs</span>
+                    <span className="text-slate-700">Expertise in diverse community needs</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">

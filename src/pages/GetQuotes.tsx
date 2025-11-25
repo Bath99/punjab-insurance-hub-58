@@ -13,7 +13,7 @@ export default function GetQuotes() {
 
   const quoteTypes = [
     { id: "supervisa", label: "Super Visa Insurance", icon: Shield, color: "from-purple-500 to-indigo-500" },
-    { id: "termlife", label: "Term Life Insurance", icon: Heart, color: "from-red-500 to-pink-500" },
+    { id: "termlife", label: "Life Insurance", icon: Heart, color: "from-red-500 to-pink-500" },
     { id: "resp", label: "RESP (Education Savings)", icon: GraduationCap, color: "from-blue-600 to-indigo-600" },
     { id: "critical", label: "Critical Illness Insurance", icon: AlertCircle, color: "from-orange-500 to-red-500" },
     { id: "disability", label: "Disability Insurance", icon: UserX, color: "from-blue-500 to-cyan-500" },
@@ -21,12 +21,12 @@ export default function GetQuotes() {
   ];
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>, type: string) => {
-    event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
     const data = Object.fromEntries(formData);
     
     // Email validation
     if (data.email && !/^\S+@\S+\.\S+$/.test(data.email as string)) {
+      event.preventDefault();
       toast.error('Please enter a valid email address');
       return;
     }
@@ -34,14 +34,15 @@ export default function GetQuotes() {
     // Travel insurance date validation
     if (type === 'Travel Insurance' && data.tripStart && data.tripEnd) {
       if (new Date(data.tripStart as string) >= new Date(data.tripEnd as string)) {
+        event.preventDefault();
         toast.error('End date must be after start date');
         return;
       }
     }
 
-    console.log('Quote Request Submitted for ' + type, data);
+    // If validation passes, show success message but don't prevent form submission
+    // Netlify will handle the actual form submission
     toast.success('Quote request sent! We\'ll contact you within 24 hours.');
-    (event.target as HTMLFormElement).reset();
   };
 
   return (
@@ -123,7 +124,17 @@ function SuperVisaForm({ onSubmit }: { onSubmit: (e: React.FormEvent<HTMLFormEle
         </CardTitle>
       </CardHeader>
       <CardContent className="p-8">
-        <form onSubmit={(e) => onSubmit(e, 'Super Visa Insurance')} className="space-y-6">
+        <form 
+          name="supervisa-quote"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          action="/getquotes?success=true"
+          onSubmit={(e) => onSubmit(e, 'Super Visa Insurance')} 
+          className="space-y-6"
+        >
+          <input type="hidden" name="form-name" value="supervisa-quote" />
+          <input type="hidden" name="quote-type" value="Super Visa Insurance" />
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name *</Label>
@@ -186,11 +197,21 @@ function TermLifeForm({ onSubmit }: { onSubmit: (e: React.FormEvent<HTMLFormElem
       <CardHeader className="bg-gradient-to-br from-red-500 to-pink-500 text-white rounded-t-xl">
         <CardTitle className="text-2xl flex items-center gap-3">
           <Heart className="w-7 h-7" />
-          Term Life Insurance Quote
+          Life Insurance Quote
         </CardTitle>
       </CardHeader>
       <CardContent className="p-8">
-        <form onSubmit={(e) => onSubmit(e, 'Term Life Insurance')} className="space-y-6">
+        <form 
+          name="life-insurance-quote"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          action="/getquotes?success=true"
+          onSubmit={(e) => onSubmit(e, 'Life Insurance')} 
+          className="space-y-6"
+        >
+          <input type="hidden" name="form-name" value="life-insurance-quote" />
+          <input type="hidden" name="quote-type" value="Life Insurance" />
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name *</Label>
@@ -265,7 +286,17 @@ function RESPForm({ onSubmit }: { onSubmit: (e: React.FormEvent<HTMLFormElement>
         </CardTitle>
       </CardHeader>
       <CardContent className="p-8">
-        <form onSubmit={(e) => onSubmit(e, 'RESP')} className="space-y-6">
+        <form 
+          name="resp-quote"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          action="/getquotes?success=true"
+          onSubmit={(e) => onSubmit(e, 'RESP')} 
+          className="space-y-6"
+        >
+          <input type="hidden" name="form-name" value="resp-quote" />
+          <input type="hidden" name="quote-type" value="RESP" />
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="name">Your Full Name *</Label>
@@ -323,7 +354,17 @@ function CriticalIllnessForm({ onSubmit }: { onSubmit: (e: React.FormEvent<HTMLF
         </CardTitle>
       </CardHeader>
       <CardContent className="p-8">
-        <form onSubmit={(e) => onSubmit(e, 'Critical Illness Insurance')} className="space-y-6">
+        <form 
+          name="critical-illness-quote"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          action="/getquotes?success=true"
+          onSubmit={(e) => onSubmit(e, 'Critical Illness Insurance')} 
+          className="space-y-6"
+        >
+          <input type="hidden" name="form-name" value="critical-illness-quote" />
+          <input type="hidden" name="quote-type" value="Critical Illness Insurance" />
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name *</Label>
@@ -385,7 +426,17 @@ function DisabilityForm({ onSubmit }: { onSubmit: (e: React.FormEvent<HTMLFormEl
         </CardTitle>
       </CardHeader>
       <CardContent className="p-8">
-        <form onSubmit={(e) => onSubmit(e, 'Disability Insurance')} className="space-y-6">
+        <form 
+          name="disability-insurance-quote"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          action="/getquotes?success=true"
+          onSubmit={(e) => onSubmit(e, 'Disability Insurance')} 
+          className="space-y-6"
+        >
+          <input type="hidden" name="form-name" value="disability-insurance-quote" />
+          <input type="hidden" name="quote-type" value="Disability Insurance" />
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name *</Label>
@@ -451,7 +502,17 @@ function TravelForm({ onSubmit }: { onSubmit: (e: React.FormEvent<HTMLFormElemen
         </CardTitle>
       </CardHeader>
       <CardContent className="p-8">
-        <form onSubmit={(e) => onSubmit(e, 'Travel Insurance')} className="space-y-6">
+        <form 
+          name="travel-insurance-quote"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          action="/getquotes?success=true"
+          onSubmit={(e) => onSubmit(e, 'Travel Insurance')} 
+          className="space-y-6"
+        >
+          <input type="hidden" name="form-name" value="travel-insurance-quote" />
+          <input type="hidden" name="quote-type" value="Travel Insurance" />
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name *</Label>
